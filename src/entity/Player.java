@@ -11,15 +11,16 @@ import java.io.IOException;
 
 public class Player extends Entity{
 
-        GamePanel gp;
-        KeyHandler keyH;
 
+    KeyHandler keyH;
     public final int screenX;
     public  final int screenY;
 
     //  Player class constructor
     public Player(GamePanel gp, KeyHandler keyH) {
-        this.gp = gp;
+
+        super(gp);
+
         this.keyH = keyH;
 
         screenX = gp.screenWidth/2 - (gp.tileSize/2);
@@ -47,7 +48,7 @@ public class Player extends Entity{
 
     public void getPlayerImage() {
         try {
-             up1 = ImageIO.read(getClass().getResourceAsStream("/player/player_up_1.png"));
+            up1 = ImageIO.read(getClass().getResourceAsStream("/player/player_up_1.png"));
             up2 = ImageIO.read(getClass().getResourceAsStream("/player/player_up_2.png"));
             down1 = ImageIO.read(getClass().getResourceAsStream("/player/player_down_1.png"));
             down2 = ImageIO.read(getClass().getResourceAsStream("/player/player_down_2.png"));
@@ -55,7 +56,7 @@ public class Player extends Entity{
             left2 = ImageIO.read(getClass().getResourceAsStream("/player/player_left_2.png"));
             right1 = ImageIO.read(getClass().getResourceAsStream("/player/player_right_1.png"));
             right2 = ImageIO.read(getClass().getResourceAsStream("/player/player_right_2.png"));
-        }catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -84,7 +85,8 @@ public class Player extends Entity{
             gp.cChecker.checkTile(this);
 
             // CHECK OBJECT COLLISION
-            gp.cChecker.checkObject(this, true);
+            int objIndex = gp.cChecker.checkObject(this, true);
+            pickupObject(objIndex); // see method below
 
             // IF COLLISION IS FALSE, PLAYER CAN MOVE
             if(!collisionOn) {
@@ -97,17 +99,24 @@ public class Player extends Entity{
             }
 
             spriteCounter++;
-            if(spriteCounter  >  18){
-                if(spriteNum == 1){
+            if (spriteCounter > 18) {
+                if (spriteNum == 1) {
                     spriteNum = 2;
-                }
-                else if(spriteNum == 2){
+                } else if (spriteNum == 2) {
                     spriteNum = 1;
                 }
                 spriteCounter = 0;
             }
-
         }
+    }
+
+    // PICKUP OBJECT METHOD  picks up the object when collides with it.
+    public void pickupObject(int i){
+
+        if(i != 999){
+            gp.obj[i] = null;
+        }
+
     }
 
     public void draw(Graphics2D g2d){
@@ -118,33 +127,30 @@ public class Player extends Entity{
 
         switch (direction) {
             case "up":
-                if(spriteNum == 1){
-                    image  = up1;}
-                else if(spriteNum == 2){
-                    image  = up2;
+                if (spriteNum == 1) {
+                    image = up1;
+                } else if (spriteNum == 2) {
+                    image = up2;
                 }
                 break;
             case "down":
-                if(spriteNum == 1) {
+                if (spriteNum == 1) {
                     image = down1;
-                }
-                else if(spriteNum == 2) {
+                } else if (spriteNum == 2) {
                     image = down2;
                 }
                 break;
             case "left":
-                if(spriteNum == 1) {
+                if (spriteNum == 1) {
                     image = left1;
-                }
-                else if(spriteNum == 2) {
+                } else if (spriteNum == 2) {
                     image = left2;
                 }
                 break;
             case "right":
-                if(spriteNum == 1) {
+                if (spriteNum == 1) {
                     image = right1;
-                }
-                else if(spriteNum == 2) {
+                } else if (spriteNum == 2) {
                     image = right2;
                 }
                 break;

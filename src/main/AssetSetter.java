@@ -12,9 +12,15 @@ public class AssetSetter {
         this.gp = gp;
     }
 
+    // Place settings of the objects.
     public void setObject(){
-        // Place settings of the objects.
-        // Below are two key  object placements
+        // The placement of the objects are as follows:
+        // Key #1 = x:30, y:6
+        // Key #2 = x:7 y:37
+        // Door #1 = x:18, y:27
+        // Door #2 = x:8, y:29
+        // Chest #1 = x:6, y:31
+
        // Key #1
         gp.obj[0]= new OBJ_Key();
         gp.obj[0].worldX = 30 * gp.tileSize;
@@ -22,8 +28,8 @@ public class AssetSetter {
 
         // Key #2
         gp.obj[1] = new OBJ_Key();
-        gp.obj[1].worldX = 8 * gp.tileSize;
-        gp.obj[1].worldY = 41 * gp.tileSize;
+        gp.obj[1].worldX = 7 * gp.tileSize;
+        gp.obj[1].worldY = 37 * gp.tileSize;
 
         // Door #1
         gp.obj[2]= new OBJ_Door();

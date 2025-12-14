@@ -1,3 +1,4 @@
+// This class is for the KEY object on the screen.
 package object;
 
 import javax.imageio.ImageIO;

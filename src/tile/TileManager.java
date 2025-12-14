@@ -40,7 +40,14 @@ public class TileManager {
     public void getTileImage() {
         try {
 
-            // System.out.println("Image loaded at start");
+            //  The world map chart numbers correspond as follows:
+            // #0 = lawn/grass
+            // #1 = water
+            // #2 = wall tiles
+            // #3 = pathway / sand
+            // #4 = trees
+            // #5 = soil / solid ground
+
             // lawn tile #0
             tile[0] = new Tile();
             tile[0].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(lawnFilePath)));

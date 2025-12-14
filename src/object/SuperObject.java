@@ -31,8 +31,4 @@ public class SuperObject {
 
     }
 
-
-
-
-
 }   // END OF CLASS

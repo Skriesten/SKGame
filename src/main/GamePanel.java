@@ -14,10 +14,10 @@ public class GamePanel extends JPanel implements Runnable {
     final int scale = 3;
 
     public final int tileSize = originalTileSize * scale; // 48 x 48 tile
-   public final int maxScreenCol = 16;
+    public final int maxScreenCol = 16;
     public final int maxScreenRow = 12;
-   public final int screenWidth = tileSize * maxScreenCol;
-   public final int screenHeight = tileSize * maxScreenRow;
+    public final int screenWidth = tileSize * maxScreenCol;
+    public final int screenHeight = tileSize * maxScreenRow;
 
    // world settings
     public final int maxWorldCol = 50;
@@ -35,7 +35,7 @@ public class GamePanel extends JPanel implements Runnable {
     public Player player = new Player(this, keyH);
     public CollisionChecker cChecker  = new CollisionChecker(this);
     public AssetSetter aSetter = new AssetSetter(this);
-    public SuperObject obj[] = new SuperObject[10];
+    public SuperObject[] obj = new SuperObject[6];
 
 
     // Game Panel Constructor
@@ -47,9 +47,10 @@ public class GamePanel extends JPanel implements Runnable {
         this.setFocusable(true);
     }
 
-    public void setUpGame(){
+    public void setUpGame() {
         aSetter.setObject();
     }
+
     public void startGameThread() {
         gameThread = new Thread(this);
         gameThread.start();
@@ -63,9 +64,9 @@ public class GamePanel extends JPanel implements Runnable {
             update();
             repaint();
             try {
-                double remainingTime = nextDrawTime -  System.nanoTime();
+                double remainingTime = nextDrawTime - System.nanoTime();
                 remainingTime /= 1000000.0;
-                if(remainingTime < 0){
+                if (remainingTime < 0) {
                     remainingTime = 0;
                 }
                 Thread.sleep((long) remainingTime);
@@ -76,8 +77,8 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
-    public void update(){
-      player.update();   // call method in the player class
+    public void update() {
+        player.update();   // call method in the player class
     }
 
     public void paintComponent(Graphics g) {
@@ -85,10 +86,10 @@ public class GamePanel extends JPanel implements Runnable {
         Graphics2D g2d = (Graphics2D) g;
         tileM.draw(g2d);
 
-        // Objecgt
-        for(int i = 0; i < obj.length; i++){
-            if(obj[i] != null){
-                obj[i].draw(g2d, this);
+        // Object
+        for (SuperObject superObject : obj) {
+            if (superObject != null) {
+                superObject.draw(g2d, this);
             }
         }
         player.draw(g2d);  // call method in the player class
